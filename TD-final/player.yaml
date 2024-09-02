@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Player Management API
+  version: 1.0.0
+  description: An API to manage football players.
+
+servers:
+  - url: https://api.football-competition.com/v1
+    description: Production server
+
+paths:
+  /players:
+    post:
+      summary: Create a new player
+      description: Create a new football player.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+      responses:
+        '201':
+          description: Player created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jude Bellingham
+        number:
+          type: integer
+          example: 5
+        preferredFoot:
+          type: string
+          enum:
+            - Left
+            - Right
+          example: Right
